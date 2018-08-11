@@ -334,7 +334,7 @@ class EditPage extends React.Component {
 
                 <label htmlFor='summary of company'>Company Summary</label>
                 <textarea name="summary" cols="30" rows="3" onChange={this.handlesummary}
-                value={this.state.form.summary} placeholder="Enter your company summary" maxLength='150'></textarea>
+                value={this.state.form.summary} placeholder="Enter your company summary" maxLength='100'></textarea>
                 {/* <input value={this.state.form.summary} type='text'
                 onChange={this.handlesummary} required /> */}
                 <br/>

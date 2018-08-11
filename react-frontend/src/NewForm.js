@@ -472,7 +472,7 @@ class NewForm extends React.Component {
                 onChange={this.handleyoutubeLink} placeholder="https://youtube.com/yourpathhere"/>
                 <br/>
                 
-                <label htmlFor=''>Company Image</label>
+                <label htmlFor=''>Company Logo .png, .jpg, .jpeg</label>
                 <input type='file' name='poi-thumbnail'
                         accept='.png, .jpg, .jpeg'
                 onChange={this.handlePicture}/>

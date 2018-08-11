@@ -1,7 +1,6 @@
 import React from 'react';
 import './LandingPage.css';
 import {Link} from 'react-router-dom';
-import Filter from './Filter';
 
 class Homepage extends React.Component{
     constructor(props){
@@ -41,11 +40,24 @@ class Homepage extends React.Component{
     }
 }
 
+    function renderLogo(picture) {
+        if (picture !== null || picture !== '') {
+            return (
+                <img src={`http://localhost:4000/${picture}`} alt=""/>
+            )
+        } else {
+            return (
+                <img src={`http://localhost:4000/images/nologo.jpg`} alt=""/>
+            )
+        }
+    }
+
     const SingleCompany = (props) => {
         return (
             <Link to={`/company/${props.companyInfo._id}`}>
                 <div className="individualCompany">
-                    <img src={`http://localhost:4000/${props.companyInfo.picture}`} alt=""/>
+                    {renderLogo(props.companyInfo.picture)}
+                    {/* <img src={`http://localhost:4000/${props.companyInfo.picture}`} alt=""/> */}
                     <h3>{props.companyInfo.name}</h3>
                 </div>
             </Link>

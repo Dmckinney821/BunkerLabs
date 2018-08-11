@@ -1,29 +1,32 @@
 import React from 'react';
 import './Company.css';
 
+    
     const Company=({companyDetail})=>
                 <div className="div-Company">This is the description of a company:
                 <h3> 
-                <img src={`http://localhost:4000/${companyDetail.picture}`} alt=""/> 
+                {/* <img src={`http://localhost:4000/${companyDetail.picture}`} alt=""/>  */}
                 <br/>               
-                <p>Summary:{companyDetail.summary}</p>
                 <p>Company Name:{companyDetail.name}</p>
+                <p>Summary:{companyDetail.summary}</p>
                 <p>Industry:{companyDetail.industry}</p>
                 <p>Stage:{companyDetail.stage}</p>
-                <p>Product and Services:{companyDetail.productAndServices}</p>
+                {/* <p>Product and Services:{companyDetail.productAndServices}</p> */}
                 <p>Company Needs:
                 <ul>
                 <li>{companyDetail.need1}</li>
-                <li>{companyDetail.need2}</li>
-                <li>{companyDetail.need3}</li>
+                {/* <li>{companyDetail.need2}</li> */}
+                {/* <li>{companyDetail.need3}</li> */}
                 </ul>
                 </p>
-                <p>Website:{companyDetail.website}</p>
+                {/* <p>Website:{companyDetail.website}</p> */}
                 <p>Email:{companyDetail.email}</p>
                 <p>Phone:{companyDetail.phone}</p>
-                <p>YouTube:{companyDetail.youtubeLine}</p>
+                {/* <p>YouTube:{companyDetail.youtubeLine}</p> */}
                 {/* Donate to this business - legal review/disclaimer needed? */}
-                <p>Donate to this business:{companyDetail.paypalLink}</p>
+                {/* <p>Donate to this business:{companyDetail.paypalLink}</p> */}
+                {/* render for profile image */}
+                {/* render for linkedIn */}
                 </h3>
                 </div>
     
