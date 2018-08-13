@@ -6,18 +6,24 @@ class Footer extends React.Component{
     render(){
         return(
 
-            <div className="footer-class">
-            <footer className="footer" >
-                <p>
+            <div>
+        <p className="address-class"> 
                     Bunker Labs
                     <br/>
                     3423 Piedmont Rd
                     <br/>
                     NE Atlanta, Ga 30305
                 </p>   
-            </footer>
-                <div className="black">@2018 Bunker Labs NFP. All Rights Reserved. |
-                    <a className="footer-class" href="https://bunkerlabs.org/privacy-policy/" data-wpel-link="internal">Privacy Policy</a> | Terms of Use	
+        
+        <div className="footer-class">
+        </div>
+
+             <footer className="footer" >
+                <div className="detail-footer-class">@2018 Bunker Labs NFP. All Rights Reserved. |
+                    <a className="footer-a-class" href="https://bunkerlabs.org/privacy-policy/" data-wpel-link="internal">Privacy Policy</a> 
+                    | Terms of Use	
+                </div>
+                    
                 <div className="social-media">
                     <div className="media1">
                         <a  href="https://www.linkedin.com/company/bunkerlabs">
@@ -42,9 +48,9 @@ class Footer extends React.Component{
                             </i>
                         </a>
                     </div> 
-                    </div>
                 </div>
-            </div>
+            </footer>
+        </div>
         );
     };
 }

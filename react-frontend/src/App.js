@@ -30,7 +30,7 @@ class App extends React.Component {
         <Route path='/admin/companies/edit/:id' component={ EditPage } exact={true}/>
         </div>
 
-        <Footer className='footer-class'/>
+        <Footer className="footer"/>
                 
         </div>
       

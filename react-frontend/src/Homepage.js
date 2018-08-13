@@ -109,10 +109,12 @@ class Homepage extends React.Component{
     
     return(
             <div>
+                <div className="admin">
                 <Link to={'/admin'} >
-                    <button>Admin Panel</button>
+                    <button className="Admin-panel">ADMIN PANEL</button>
                 </Link>
-
+                </div>
+                <div>
                 <SearchBar text={this.state.searchText} 
                 handleChange={this._updateSearchText} />
                 
@@ -125,7 +127,7 @@ class Homepage extends React.Component{
 
                 <div className="companyContainer">
                 {/* {this.state.companies.map(this._renderSingleCompany)} */}
-
+                </div>
                 </div>
             </div>
         )

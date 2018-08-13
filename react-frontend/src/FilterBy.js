@@ -11,11 +11,9 @@ class FilterBy extends React.Component{
     };
     
     render(){
-
             return(
-                
                 <div className="filter-button">
-                    <select name={this.props.type} defaultValue={this.props.value} onChange={(e) => 
+                    <select className="select-filterby" name={this.props.type} defaultValue={this.props.value} onChange={(e) => 
                     {this.props.handleChange(e.target.value)}} >
                         {this.props.listItems.map(item => this._convertToDropDown(item))}
                     </select>
