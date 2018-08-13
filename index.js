@@ -18,7 +18,6 @@ const Schema = mongoose.Schema;
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const expressJwt = require('express-jwt');
-
 const {createAccount, verifyToken, verifyUser} = require('./routes/auth');
 const admin = require('./admin')
 
@@ -37,13 +36,9 @@ const {
     findOneCompany,
     updateCompanyPhoto,
     findCompanyByIndustry,
-
     findCompanyByStage ,
     findAdminByUsername
-
 } = require('./db.js');
-
-
 
 app.engine('.hbs', expressHbs({
     defaultLayout: 'layout',
@@ -57,9 +52,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-
-
-// API routes if we use express router???
 
 // This is for cross domain fun --> from Chris
 app.all('*', function (req, res, next) {
@@ -81,11 +73,11 @@ app.post('/createAccount', createAccount)
 
 //public routes
 // Returns JSON data for all companies
-app.get('/api/companies/', (req, res) => {
-    findAllCompanies()
-        .then(companies => res.json(companies))
-        .catch((err) => res.send(err));
-});
+// app.get('/api/companies/', (req, res) => {
+//     findAllCompanies()
+//         .then(companies => res.json(companies))
+//         .catch((err) => res.send(err));
+// });
 
 // Returns JSON data for specific company
 app.get('/api/companies/:id', (req, res) => {
@@ -112,134 +104,6 @@ app.get('/api/company/byStage/:stage', (req, res) => {
 
 });
 
-//routes ONLY if authentication is verified
-// Returns JSON of name/userId of all admins
-app.post('/api/admin/', verifyUser) 
-    //put authentication part
-
-
-app.get('/api/admins/', (req, res) => {
-
-    findAllAdmins()
-        .then(admins => res.json(admins))
-        .catch((err) => res.send(err));
-
-});
-
-// Returns JSON of name/userId for specific admin
-app.get('/api/admins/:id', (req, res) => {
-    findOneAdmin(req.params.id)
-        .then(company => res.json(company))
-        .catch((err) => res.send(err));
-
-});
-
-app.post('/api/deletecompany/:id', (req,res) => {
-    let companyId = req.params.id;
-    deleteCompany(companyId)
-    .then(company => res.json(company))
-    .catch((err) => res.send(err));
-})
-
-// updates name/userId for specific admin
-app.post('/api/updateadmins/:id', (req, res) => {
-    updateAdmin(req.body)
-    .then(admin => res.json(admin))
-    .catch((err) => res.send(err));
-});
-
-// create new company
-app.post('/api/createcompany', (req, res) => {
-    // console.log(req.body)
-    let newCompanyObject = {
-        name: req.body.name,
-        summary: req.body.summary,
-        industry: req.body.industry,
-        stage: req.body.stage,
-        productAndServices: req.body.productAndServices,
-        needs: req.body.needs,
-        website: req.body.website,
-        email: req.body. email,
-        phone: req.body.phone,
-        youtubeLink: req.body.youtubeLink,
-        paypalLink: req.body.paypalLink,
-        location: req.body.location,
-        profile: req.body.profile,
-        linkedIn: req.body.linkedIn
-    };
-    createCompany(newCompanyObject)
-        .then(company => res.json(company))
-        .catch((err) => res.send(err));
-});
-
-app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) => {
-    fs.rename(req.file.path, 
-    `public/images/${req.params.id}`, 
-    (err) => { 
-        if (err) {
-            console.log(err);
-        }
-    })
-    let imagePath = `images/${req.params.id}`;
-    let id = req.params.id;
-    let companyObject = {
-        _id: id,
-        picture: imagePath
-    };
-    updateCompanyPhoto(companyObject)
-        .then(company => res.json(company))
-        .catch((err) => res.send(err));
-});
-
-//updates specific company 
-app.post('/api/updatecompany/:id', (req, res) => {
-    console.log(req.body)
-    let newCompanyObject = {
-        _id: req.params.id,
-        name: req.body.name,
-        summary: req.body.summary,
-        industry: req.body.industry,
-        stage: req.body.stage,
-        productAndServices: req.body.productAndServices,
-        needs: req.body.needs,
-        website: req.body.website,
-        email: req.body.email,
-        phone: req.body.phone,
-        youtubeLink: req.body.youtubeLink,
-        paypalLink: req.body.paypalLink,
-        location: req.body.location,
-        profile: req.body.profile,
-        linkedIn: req.body.linkedIn
-    };
-    updateCompany(newCompanyObject)
-        .then(company => res.json(company))
-        .catch((err) => res.send(err));
-});
-
-app.post('/api/updatecompanypicture/:id', upload.single('picture'), (req, res) => {
-    // Need to delete old picture at public/images/:id before renaming old one
-    // Check DB to see if picture exists before trying to delete
-    // console.log(req.file);
-
-    fs.rename(req.file.path,
-        `public/images/${req.params.id}`,
-        (err) => {
-            if (err) {
-                console.log(err);
-            }
-        });
-
-    let imagePath = `images/${req.params.id}`;
-    let id = req.params.id;
-    let companyObject = {
-        _id: id,
-        picture: imagePath
-    };
-    updateCompanyPhoto(companyObject)
-        .then(company => res.json(company))
-        .catch((err) => res.send(err));
-});
-
 //filter all companies by industry 
 app.get('/api/company/byIndustry/:industry', (req, res) => {
     let industry = req.params.industry; 
@@ -257,14 +121,140 @@ app.get('/api/company/byStage/:stage', (req, res) => {
             .catch((err) => res.send(err))
 
 });
+
+//routes ONLY if authentication is verified
+// Returns JSON of name/userId of all admins
+app.post('/api/admin/', verifyUser) 
+    //put authentication part
+
+
+// app.get('/api/admins/', (req, res) => {
+//     findAllAdmins()
+//         .then(admins => res.json(admins))
+//         .catch((err) => res.send(err));
+
+// });
+
+// // Returns JSON of name/userId for specific admin
+// app.get('/api/admins/:id', (req, res) => {
+//     findOneAdmin(req.params.id)
+//         .then(company => res.json(company))
+//         .catch((err) => res.send(err));
+
+// });
+
+// app.post('/api/deletecompany/:id', (req,res) => {
+//     let companyId = req.params.id;
+//     deleteCompany(companyId)
+//     .then(company => res.json(company))
+//     .catch((err) => res.send(err));
+// })
+
+// // updates name/userId for specific admin
+// app.post('/api/updateadmins/:id', (req, res) => {
+//     updateAdmin(req.body)
+//     .then(admin => res.json(admin))
+//     .catch((err) => res.send(err));
+// });
+
+// // create new company
+// app.post('/api/createcompany', (req, res) => {
+//     // console.log(req.body)
+//     let newCompanyObject = {
+//         name: req.body.name,
+//         summary: req.body.summary,
+//         industry: req.body.industry,
+//         stage: req.body.stage,
+//         productAndServices: req.body.productAndServices,
+//         needs: req.body.needs,
+//         website: req.body.website,
+//         email: req.body. email,
+//         phone: req.body.phone,
+//         youtubeLink: req.body.youtubeLink,
+//         paypalLink: req.body.paypalLink,
+//         location: req.body.location,
+//         profile: req.body.profile,
+//         linkedIn: req.body.linkedIn
+//     };
+//     createCompany(newCompanyObject)
+//         .then(company => res.json(company))
+//         .catch((err) => res.send(err));
+// });
+
+// app.post('/api/createcompanypicture/:id', upload.single('picture'), (req, res) => {
+//     fs.rename(req.file.path, 
+//     `public/images/${req.params.id}`, 
+//     (err) => { 
+//         if (err) {
+//             console.log(err);
+//         }
+//     })
+//     let imagePath = `images/${req.params.id}`;
+//     let id = req.params.id;
+//     let companyObject = {
+//         _id: id,
+//         picture: imagePath
+//     };
+//     updateCompanyPhoto(companyObject)
+//         .then(company => res.json(company))
+//         .catch((err) => res.send(err));
+// });
+
+// //updates specific company 
+// app.post('/api/updatecompany/:id', (req, res) => {
+//     console.log(req.body)
+//     let newCompanyObject = {
+//         _id: req.params.id,
+//         name: req.body.name,
+//         summary: req.body.summary,
+//         industry: req.body.industry,
+//         stage: req.body.stage,
+//         productAndServices: req.body.productAndServices,
+//         needs: req.body.needs,
+//         website: req.body.website,
+//         email: req.body.email,
+//         phone: req.body.phone,
+//         youtubeLink: req.body.youtubeLink,
+//         paypalLink: req.body.paypalLink,
+//         location: req.body.location,
+//         profile: req.body.profile,
+//         linkedIn: req.body.linkedIn
+//     };
+//     updateCompany(newCompanyObject)
+//         .then(company => res.json(company))
+//         .catch((err) => res.send(err));
+// });
+
+// app.post('/api/updatecompanypicture/:id', upload.single('picture'), (req, res) => {
+//     // Need to delete old picture at public/images/:id before renaming old one
+//     // Check DB to see if picture exists before trying to delete
+//     // console.log(req.file);
+
+//     fs.rename(req.file.path,
+//         `public/images/${req.params.id}`,
+//         (err) => {
+//             if (err) {
+//                 console.log(err);
+//             }
+//         });
+
+//     let imagePath = `images/${req.params.id}`;
+//     let id = req.params.id;
+//     let companyObject = {
+//         _id: id,
+//         picture: imagePath
+//     };
+//     updateCompanyPhoto(companyObject)
+//         .then(company => res.json(company))
+//         .catch((err) => res.send(err));
+// });
   
+app.use(verifyToken, admin)
+
 //404 message for nonexistent routes
 app.get('*', function (req, res) {
     res.send('page not found', 404);
 });
-
-app.use(verifyToken, admin)
-
 app.listen(port, () => {
     console.log(`Your server is running at http://localhost:${port}`);
 });

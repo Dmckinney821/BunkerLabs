@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const mongooseUrl = 'mongodb://localhost:27017/Bunkerlabs';
 const Admin = require('./models/admin.js');
-const Company = require('./models/company.js')
+const Company = require('./models/company.js');
+const bcrypt = require('bcrypt');
 
 // Connect to mongodb
 mongoose.connect(mongooseUrl, 
@@ -16,10 +17,15 @@ db.once('open', () => {
     console.log('Connected to mongodb!');
 });
 
+
+function createHashPassword(password) {
+    return bcrypt.hashSync(password, 10);
+}
+
 function createAdmin(username, password, superUser=true) {
-    var user = new Admin({
+      var user = new Admin({
         username: username,
-        password: password,
+        password: createHashPassword(password),
         superUser: superUser
     });
 
@@ -53,18 +59,13 @@ function findOneAdmin(userId) {
 function findAdminByUsername(username) {
     return Admin
     .findOne({ 'username': username })
-    .select('username password')
+    .select('username password superUser')
     .exec()
     .then(admin => {
         return admin;
     })
     .catch(err => console.log(err));
-
-
-
- }
-
-
+}
 
 function deleteAdmin(userId) {
     return Admin

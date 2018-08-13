@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+
+// const {
+//     getLoginBody
+// } = require('../models/admin');
 
 class adminLogin extends React.Component {
     constructor(props){
         super(props);
     
-    this.state =  {
-        username : '',
-        password : ''
-    } 
+     this.state =  {
+         username : '',
+         password : ''
+     } 
 }
 
 handleUsername = (event) => {
@@ -34,7 +38,7 @@ handleLogin = () => {
 
     fetch(serverRequest, {
         headers: new Headers({
-            "Content-type" : "application/json"  
+           "Content-type" : "application/json"  
         }),
         body: JSON.stringify(loginBody) , 
         method : "POST"
@@ -42,39 +46,44 @@ handleLogin = () => {
     .then((data) => data.text()
     )
     .then((data) => {
-        console.log(data);
-        //store in local Storage
-        // then redirect to admin homepage... at admin homepage and all routes after check in localstorage for token.. if no token redirect back to login
+         console.log(data);     
+         //if password is correct store token in local storage
+        if (this.state.password !== data){
+         //store in local Storage
+         console.log("did not match must be token")
+         localStorage.setItem('token', JSON.stringify(data))
+         console.log("token saved")
+         this.props.history.push('./admin')
+        }
     })
-    // .then((data) =>
-    //   getLoginBody(data)  
-    // )
+   
 }
 
 
 render(){ 
-    return (
-        <div>
-            <div>username</div>
-            <input onChange={this.handleUsername}
-            type="text"
-            value={this.state.username}
-            />
+   return (
+       <div>
+           <div>username</div>
+           <input onChange={this.handleUsername}
+           type="text"
+           value={this.state.username}
+           />
             
             <div>password </div>
             <input onChange={this.handlePassword}
-            type="password"
-            value={this.state.password}
-            />
+           type="text"
+           value={this.state.password}
+           />
             
             <br></br>
             
             <button onClick={this.handleLogin}>Login</button>
 
-        </div>
-    );
+           </div>
+   );
 };
 
 }
 
 export default adminLogin;
+
