@@ -33,9 +33,9 @@ let createAccount = (req, res) => {
 let verifyUser = async (req,res) => {
     let {username, password} = req.body;
     //change admin function to input username instead of userId
-    console.log(username, password);
+    //console.log(username, password);
     let user = await findAdminByUsername(username)
-    console.log(user)
+    //console.log(user)
     let isValid = await bcrypt.compare(password, user.password)
     if (isValid){
         let token = generateToken(user)     

@@ -46,13 +46,10 @@ handleLogin = () => {
     .then((data) => data.text()
     )
     .then((data) => {
-         console.log(data);     
          //if password is correct store token in local storage
         if (this.state.password !== data){
          //store in local Storage
-         console.log("did not match must be token")
          localStorage.setItem('token', JSON.stringify(data))
-         console.log("token saved")
          this.props.history.push('./admin')
         }
     })
