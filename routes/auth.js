@@ -11,16 +11,14 @@ let hashPassword = (password) => {
 
 const generateToken = (user) => {
     return token = jwt.sign(
-        { admin : user.username
-        // approved or disapproved here
+        { admin : user.username, 
+          superUser : user.superUser
         },
         signature, 
         {  expiresIn: '1d' // expires in 24 hours
         });
 
 }
-
-
 
 let createAccount = (req, res) => {
     let {username, password} = req.body;
@@ -30,22 +28,20 @@ let createAccount = (req, res) => {
     .then(res.send("Account created"));
     
     }) 
-    
 }
 
 let verifyUser = async (req,res) => {
-
     let {username, password} = req.body;
     //change admin function to input username instead of userId
-    console.log(username, password);
+    //console.log(username, password);
     let user = await findAdminByUsername(username)
-    console.log(user)
+    //console.log(user)
     let isValid = await bcrypt.compare(password, user.password)
     if (isValid){
-        let token = generateToken(user)
+        let token = generateToken(user)     
         res.send(token);
     } else{
-        res.send('wrong password');
+        res.send(password);
     }
 }
 
@@ -57,13 +53,13 @@ let verifyToken = async (req, res, next) => {
     } catch (error){
          console.log(error);
     }
-    if (payload){
+        if (payload.superUser === true){
         req.jwt = payload;
         next();
-    }  else {
-        res.send('invalid token');
+        } else {
+            res.send('unverified user')
+        }
     }
-}
 
 module.exports = {
     verifyToken, verifyUser, createAccount, generateToken

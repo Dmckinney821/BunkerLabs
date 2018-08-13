@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 import {
-    Link
+    Link, Redirect
 } from 'react-router-dom';
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Modal } from 'react-bootstrap';
 
@@ -28,11 +28,23 @@ class EditPage extends React.Component {
                 picture: null,
                 linkedIn: '',
                 profile: ''
-            }
+            },
+            token : "",
+            redirect: false
         }
     }
 
-    componentDidMount() {
+    componentDidMount() {  
+        let localToken = localStorage.getItem('token');
+        if (localToken){
+            this.setState({
+               token: localToken
+            })} 
+            else {
+                //redirect react route
+                this.setState({
+                    redirect: true
+                })}      
     fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
     .then(res => res.json())
     .then(companyData => {
@@ -244,7 +256,18 @@ class EditPage extends React.Component {
             profile: this.state.form.profile,
             linkedIn: this.state.form.linkedIn,
         };
-
+        //check local storage for token and if its there setState to token : token
+        //if it doesnt exists or expired redirect to login
+        let localToken = localStorage.getItem('token');
+        if (localToken){
+            this.setState({
+               token: localToken
+            })} 
+            else {
+                //redirect react route
+                this.setState({
+                    redirect: true
+                })}
         axios.post(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`, companyObject)
             .then(res => {
                 // console.log(res);
@@ -271,6 +294,21 @@ class EditPage extends React.Component {
     }; 
 
     deleteCompany = (event) => {
+        //check local storage for token and if its there setState to token : token
+        //if it doesnt exists or expired redirect to login
+        let localToken = localStorage.getItem('token');
+        if (localToken){
+            console.log("token found")
+            this.setState({
+               token: localToken
+            })} 
+            else {
+                //redirect react route
+                this.setState({
+                    redirect: true
+                })
+                console.log(this.state.redirect)
+            }
         // event.preventDefault()
         axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id)
         .then(res => {
@@ -317,7 +355,10 @@ class EditPage extends React.Component {
         });
     }
 
-    render() {
+    renderRedirect = () =>  {
+        if (this.state.redirect){
+            return <Redirect to='/login' />
+        } else {
         return (
             <div class="form-outer-container">
                 <div className="form-container">
@@ -618,9 +659,17 @@ class EditPage extends React.Component {
                 </div>
             
             </div>
-        );
+            );
+        }
+    }
+
+
+    render() {
+        return (
+            <div>
+                {this.renderRedirect()}
+            </div>
+        )
     }
 }
-
-
 export default EditPage;
