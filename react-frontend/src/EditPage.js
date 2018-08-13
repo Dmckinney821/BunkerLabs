@@ -29,8 +29,8 @@ class EditPage extends React.Component {
                 linkedIn: '',
                 profile: ''
             },
-            token : "",
-            redirect: false
+            token : ""
+        
         }
     }
 
@@ -41,10 +41,8 @@ class EditPage extends React.Component {
                token: localToken
             })} 
             else {
-                //redirect react route
-                this.setState({
-                    redirect: true
-                })}      
+              this.props.history.push('/login')
+            }   
     fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
     .then(res => res.json())
     .then(companyData => {
@@ -256,18 +254,6 @@ class EditPage extends React.Component {
             profile: this.state.form.profile,
             linkedIn: this.state.form.linkedIn,
         };
-        //check local storage for token and if its there setState to token : token
-        //if it doesnt exists or expired redirect to login
-        let localToken = localStorage.getItem('token');
-        if (localToken){
-            this.setState({
-               token: localToken
-            })} 
-            else {
-                //redirect react route
-                this.setState({
-                    redirect: true
-                })}
         axios.post(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`, companyObject)
             .then(res => {
                 // console.log(res);
@@ -294,21 +280,6 @@ class EditPage extends React.Component {
     }; 
 
     deleteCompany = (event) => {
-        //check local storage for token and if its there setState to token : token
-        //if it doesnt exists or expired redirect to login
-        let localToken = localStorage.getItem('token');
-        if (localToken){
-            console.log("token found")
-            this.setState({
-               token: localToken
-            })} 
-            else {
-                //redirect react route
-                this.setState({
-                    redirect: true
-                })
-                console.log(this.state.redirect)
-            }
         // event.preventDefault()
         axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id)
         .then(res => {
@@ -355,11 +326,8 @@ class EditPage extends React.Component {
         });
     }
 
-    renderRedirect = () =>  {
-        if (this.state.redirect){
-            return <Redirect to='/login' />
-        } else {
-        return (
+        render() {
+         return (
             <div class="form-outer-container">
                 <div className="form-container">
                 <h2>Edit or Delete {this.state.form.name}'s Profile</h2>
@@ -663,13 +631,4 @@ class EditPage extends React.Component {
         }
     }
 
-
-    render() {
-        return (
-            <div>
-                {this.renderRedirect()}
-            </div>
-        )
-    }
-}
 export default EditPage;

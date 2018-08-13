@@ -16,9 +16,9 @@ class NewForm extends React.Component {
                 name: '',
                 website: '',
                 summary: '',
-                need1: 'Investing',
-                need2: 'Mentorship',
-                need3: 'Employees',
+                need1: '',
+                need2: '',
+                need3: '',
                 youtubeLink: '',
                 productAndServices: '',
                 phone: '',
@@ -31,8 +31,8 @@ class NewForm extends React.Component {
                 linkedIn: '',
                 profile: ''
             }, 
-            token : "",
-            redirect : false
+            token : ""
+        
         }
     }
 
@@ -45,10 +45,8 @@ class NewForm extends React.Component {
                token: localToken
             })} 
             else {
-                //redirect react route
-                this.setState({
-                    redirect: true
-                })}
+                this.props.history.push('/login')
+                }
         this.setState({
             baseFormState: this.state.form
         });
@@ -215,9 +213,9 @@ class NewForm extends React.Component {
                 name: '',
                 website: '',
                 summary: '',
-                need1: 'Investing',
-                need2: 'Mentorship',
-                need3: 'Employees',
+                need1: '',
+                need2: '',
+                need3: '',
                 youtubeLink: '',
                 productAndServices: '',
                 phone: '',
@@ -266,18 +264,6 @@ class NewForm extends React.Component {
             profile: this.state.form.profile,
             linkedIn: this.state.form.linkedIn,
         };
-        //check local storage for token and if its there setState to token : token
-        //if it doesnt exists or expired redirect to login
-        let localToken = localStorage.getItem('token');
-        if (localToken){
-            this.setState({
-               token: localToken
-            })} 
-            else {
-                //redirect react route
-                this.setState({
-                    redirect: true
-                })}
         axios.post('http://localhost:4000/api/createcompany', companyObject)
         .then(res => {
             return res.data._id;
@@ -287,18 +273,6 @@ class NewForm extends React.Component {
             this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
             fd = new FormData();
             fd.append('picture', blob);
-             //check local storage for token and if its there setState to token : token
-            //if it doesnt exists or expired redirect to login
-            let localToken = localStorage.getItem('token');
-            if (localToken){
-                this.setState({
-                token: localToken
-                })} 
-            else {
-                //redirect react route
-                this.setState({
-                    redirect: true
-                })}
             axios({
                 method: 'post',
                 url: `http://localhost:4000/api/createcompanypicture/${id}`,
@@ -333,10 +307,7 @@ class NewForm extends React.Component {
         });
     }
 
-    renderRedirect = () => {
-        if (this.state.redirect){
-            return <Redirect to ='/login' />
-        } else {
+    render() {
         return (
             <div>
 
@@ -552,13 +523,5 @@ class NewForm extends React.Component {
         }
     }
 
-    render(){
-        return (
-            <div>
-                {this.renderRedirect()}
-             </div>
-        )
-    }
-}
 
 export default NewForm;
