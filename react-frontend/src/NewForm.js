@@ -518,6 +518,7 @@ class NewForm extends React.Component {
                             <option>Apparel</option>
                             <option>Banking</option>
                             <option>Media</option>
+                            <option>Cleaning</option>
                             <option>Construction</option>
                             <option>Civic</option>
                             <option>Real Estate</option>
@@ -529,11 +530,13 @@ class NewForm extends React.Component {
                             <option>Entertainment</option>
                             <option>Food/Beverage</option>
                             <option>Health/Fitness</option>
+                            <option>Housing</option>
                             <option>IT</option>
                             <option>Insurance</option>
                             <option>Legal Services</option>
                             <option>Leisure</option>
                             <option>Management/Consulting</option>
+                            <option>Medical</option>
                             <option>Military</option>
                             <option>Music</option>
                             <option>News</option>
