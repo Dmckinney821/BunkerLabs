@@ -41,7 +41,7 @@ class NewForm extends React.Component {
     componentDidMount() {
         //check local storage for token and if its there setState to token : token
         //if it doesnt exists or expired redirect to login
-        let serverRequest = 'http://localhost:4000/api/verifyToken';
+        let serverRequest = '/api/verifyToken';
         let localToken = JSON.parse(localStorage.getItem('token'))
         
 
@@ -309,7 +309,7 @@ class NewForm extends React.Component {
             'token': JSON.parse(localStorage.getItem('token'))
         };
         
-        axios.post('http://localhost:4000/api/createcompany', companyObject, {headers})
+        axios.post('/api/createcompany', companyObject, {headers})
         .then(res => {
             return res.data._id;
         })
@@ -321,7 +321,7 @@ class NewForm extends React.Component {
                     fd.append('picture', this.state.logoBlob);
                     axios({
                         method: 'post',
-                        url: `http://localhost:4000/api/createcompanypicture/${id}`,
+                        url: `/api/createcompanypicture/${id}`,
                         data: fd,
                         headers: {'Content-Type': 'multipart/form-data', ...headers }
                     })
@@ -337,7 +337,7 @@ class NewForm extends React.Component {
                 fd.append('picture', this.state.ownerBlob)
                 axios({
                     method: 'post',
-                    url: `http://localhost:4000/api/createownerphoto/${id}`,
+                    url: `/api/createownerphoto/${id}`,
                     data: fd,
                     headers: {
                         'Content-Type': 'multipart/form-data',

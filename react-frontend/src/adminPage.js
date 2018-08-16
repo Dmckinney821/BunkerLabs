@@ -24,7 +24,7 @@ class adminPage extends React.Component {
     componentDidMount() {
         //check local storage for token and if its there setState to token : token
         //if it doesnt exists or expired redirect to login
-        let serverRequest = 'http://localhost:4000/api/verifyToken';
+        let serverRequest = '/api/verifyToken';
         let localToken = JSON.parse(localStorage.getItem('token'))
 
         axios({
@@ -43,7 +43,7 @@ class adminPage extends React.Component {
             .catch(error => console.log(error));
         
 
-        fetch('http://localhost:4000/api/companies')
+        fetch('/api/companies')
         .then(res => res.json())
         .then(companies => {
             this.setState({
