@@ -79,7 +79,7 @@ import ReactPlayer from 'react-player';
                     <div className="youtube-item">
                     <ReactPlayer
                     url={'https://www.youtube.com/watch?v=QXZxsySko4U'}
-                    // width='100%'
+                    width='100%'
                     // height='420px'
                     />
                     </div>

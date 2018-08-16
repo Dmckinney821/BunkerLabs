@@ -34,11 +34,9 @@
     display: flex;
     flex-basis: 20%;
     flex-direction: column;
-    /* justify-content: flex-start; */
     height: fit-content;
     justify-content: flex-start;
     align-items: center;
-    /* justify-content: center; */
     margin-bottom: 30px;
     
 }
