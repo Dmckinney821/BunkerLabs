@@ -214,8 +214,18 @@ class EditPage extends React.Component {
                 });
             };
             reader.readAsDataURL(event.target.files[0]);
-            this.toggleCropperHidden();
+            // this.toggleCropperHidden();
+            this.handleOpenModalCropper();
         };
+    }
+
+    handleLogoCropAccept = () => {
+        this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
+            this.setState({
+                    logoBlob: blob
+                },
+                this.handleCloseModalCropper());
+        });
     }
 
     handleProfile = (event) => {
@@ -291,11 +301,11 @@ class EditPage extends React.Component {
                 return res.data._id
             })
         .then((id) => {
-            if (this.state.imagePreview) {
+            if (this.state.logoBlob) {
             let fd;
-            this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
+            // this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
             fd = new FormData();
-            fd.append('picture', blob);
+            fd.append('picture', this.state.logoBlob);
             axios({
                 method: 'post',
                 url: `http://localhost:4000/api/updatecompanypicture/${id}`,
@@ -303,7 +313,7 @@ class EditPage extends React.Component {
                 headers: {'Content-Type': 'multipart/form-data', ...headers }
                 })
                 .catch(err => console.log(err));
-                })
+                // })
             }
             return id
         })
@@ -382,6 +392,18 @@ class EditPage extends React.Component {
     handleCloseModalUpdate = () => {
         this.setState({
             showModalUpdate: false
+        });
+    }
+
+    handleOpenModalCropper = () => {
+        this.setState({ 
+            showModalCropper: true 
+        });
+    }
+    
+    handleCloseModalCropper = () => {
+        this.setState({ 
+            showModalCropper: false,
         });
     }
 
@@ -665,7 +687,7 @@ class EditPage extends React.Component {
                     </div>     
                 </Form>
     </div>
-            {!this.state.cropperIsHidden && 
+            {/* {!this.state.cropperIsHidden && 
             <Cropper
                 ref='cropper'
                 src={this.state.imagePreview}
@@ -680,7 +702,34 @@ class EditPage extends React.Component {
                 cropBoxMovable={true}
                 cropBoxResizable={false}
                 crop={this._crop.bind(this)} />
-            }
+            } */}
+
+            <div className="modal-cropper-logo">
+                    <Modal show={this.state.showModalCropper} onHide={this.handleCloseModalCropper}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Crop Image</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Cropper
+                            ref='cropper'
+                            src={this.state.imagePreview}
+                            style={{height: 400, width: '100%'}}
+                            // Cropper.js options
+                            aspectRatio={8/6}
+                            guides={false}
+                            autoCropArea={0}
+                            strict={false}
+                            highlight={false}
+                            dragCrop={true}
+                            cropBoxMovable={true}
+                            cropBoxResizable={false}
+                            crop={this._crop.bind(this)} />
+                        </Modal.Body>
+                        <Modal.Footer> 
+                                <Button bsStyle="success" onClick={this.handleLogoCropAccept}>Continue</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
             
             {/* update modal */}
             <div className="static-modal">

@@ -192,7 +192,8 @@ class NewForm extends React.Component {
                 });
             };
             reader.readAsDataURL(event.target.files[0]);
-            this.toggleCropperHidden();
+            // this.toggleCropperHidden();
+            this.handleOpenModalCropper();
         };
     }
 
@@ -263,6 +264,15 @@ class NewForm extends React.Component {
             imagePreview: null
         });        
     }
+
+    handleLogoCropAccept = () => {
+        this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
+            this.setState({
+                logoBlob: blob
+            },
+        this.handleCloseModalCropper());
+        });
+    }
     
     handleEntry(event){
         event.preventDefault();
@@ -295,10 +305,10 @@ class NewForm extends React.Component {
         })
         .then((id) => {
             let fd;
-            if (this.state.imagePreview) {
-                this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
+            if (this.state.logoBlob) {
+                // this.refs.cropper.getCroppedCanvas().toBlob((blob) => {
                     fd = new FormData();
-                    fd.append('picture', blob);
+                    fd.append('picture', this.state.logoBlob);
                     axios({
                         method: 'post',
                         url: `http://localhost:4000/api/createcompanypicture/${id}`,
@@ -306,7 +316,7 @@ class NewForm extends React.Component {
                         headers: {'Content-Type': 'multipart/form-data', ...headers }
                     })
                     .catch(err => console.log(err));
-                })
+                // })
             }
             return id
         })
@@ -348,6 +358,17 @@ class NewForm extends React.Component {
     handleCloseModal = () => {
         this.setState({ 
             showModal: false,
+        });
+    }
+    handleOpenModalCropper = () => {
+        this.setState({ 
+            showModalCropper: true 
+        });
+    }
+    
+    handleCloseModalCropper = () => {
+        this.setState({ 
+            showModalCropper: false,
         });
     }
 
@@ -632,7 +653,7 @@ class NewForm extends React.Component {
                     
                 </Form>
     </div>
-            {!this.state.cropperIsHidden &&
+            {/* {!this.state.cropperIsHidden &&
             <Cropper
                 ref='cropper'
                 src={this.state.imagePreview}
@@ -646,7 +667,34 @@ class NewForm extends React.Component {
                 dragCrop={true}
                 cropBoxMovable={true}
                 cropBoxResizable={false}
-                crop={this._crop.bind(this)} />}
+                crop={this._crop.bind(this)} />} */}
+
+                <div className="modal-cropper-logo">
+                    <Modal show={this.state.showModalCropper} onHide={this.handleCloseModalCropper}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Crop Image</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Cropper
+                            ref='cropper'
+                            src={this.state.imagePreview}
+                            style={{height: 400, width: '100%'}}
+                            // Cropper.js options
+                            aspectRatio={8/6}
+                            guides={false}
+                            autoCropArea={0}
+                            strict={false}
+                            highlight={false}
+                            dragCrop={true}
+                            cropBoxMovable={true}
+                            cropBoxResizable={false}
+                            crop={this._crop.bind(this)} />
+                        </Modal.Body>
+                        <Modal.Footer> 
+                                <Button bsStyle="success" onClick={this.handleLogoCropAccept}>Continue</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
 
                 <div className="static-modal">
                     <Modal show={this.state.showModal} onHide={this.handleCloseModal}>
