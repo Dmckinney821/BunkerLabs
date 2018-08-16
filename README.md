@@ -1,8 +1,8 @@
-## BunkerLabs Marketplace
+## BunkerLabs Atlanta
 
-## <a href=""> BunkerLabs Marketplace Demo</a>
+## <a href=""> BunkerLabs Atlanta Demo</a>
 
-BunkerLabs Marketplace represents not only the capstone project for Digital Crafts, for which the team members employed their development skills learned during the duration of the cohort, but also a platform the veterans seeking support when starting a business, can use to help in their journey.
+BunkerLabs Atlanta Marketplace represents the Capstone project for the DigitalCrafts team members. The members listed below used all of the skills and languages learned over the 16 week bootcamp to build an application for a business located in the Atlanta Tech Village. The platform allows veterans to illustrate their entrepreneurial endeavors and showcase what needs they may have in bringing their ideas into fruition.
 
 ## Team Members
 * <a href="https://github.com/stephenjarrett"> Stephen Jarrett</a>
@@ -19,59 +19,65 @@ BunkerLabs Marketplace represents not only the capstone project for Digital Craf
 * Express
 * Robo3T/ MongoCompass
 * Postman
+* JavaScript
 
 ## Site walkthrough 
-The BunkerLabs Marketplace Atlanta website serves as a launching platform for veterans to present their startup businesses and elicit support in order to have a healthy growth and be successful in a competitive market.
+BunkerLabs Atlanta serves as a launching platform for veterans to present their startup businesses and elicit support in order to have healthy growth and be successful in a competitive market.
 
 
 ### Landing Page
-The Landing Page displays the Logo of the companies and their names.The user can both search a company by name and also sort by industry type and by stage of the bussiness. After all the previous steps are executed, the user is presented with a grid of logos that match the selected criterias.
+The Landing Page displays the different companies currently featured. The user can search for different companies to help or engage. The user can choose a company and they are displayed the companies details and a "pitch" video to help illustrate the ideals.
 
 <img src="readme/landingPage.png">
 
 ### Company Detail Page
-The user can click on the Company Logo and it will be redirected to a Company Detail Page. On this page, one can find more information about the startup ranging from Logo and company name, to the  image of the entrepreneur.Also, the top three needs of the business are displayed and the social network addresses for the respective company.
+The user can click on the Company Logo and it will be redirected to a Company Detail Page. On this page, one can find more information about the startup ranging from logo, the entrepreneur, or current stage of maturation. The top three needs of the business are displayed and the social network addresses for the companies are available to link up.
 
 <img src="readme/Company.png">
 
 
 ### Admin Page
-The Admin Page has two main components: the Admin Panel Login Page and the Admin Home Panel Page. The Admin Page was created having both security and ease of use  in mind. On this page, the admin can enter data for a company, edit the information of the business or delete a company profile.
+The Admin Page has two main components: the Admin Panel Login Page and the Admin Home Panel Page. The Admin Page is secure and a valid log in is necessary . Once logged in, the admin can enter the companies valid information. They can edit the information as the business needs change and the company moves towards critical mass. 
 
 
 #### Admin Panel Login Page
-On the Admin Panel Login Page, the administrator must enter a username and password to be granted access to the Admin Home Panel.Only after the login credentials are valided, the Admin can access the page and start making changes.
+On the Admin Panel Login Page, the admin must enter a valid username and password to be granted access to the Admin Home Panel. Once validated, the Admin can access the necessary pages to edit or delete company data.
 
-<img src="readme/Login">
+<img src="readme/Login.png">
 
 #### Admin Home Panel Page
-Once granted login priviledges, the administrator can access the Admin Home Panel Page and choose from a dropdown to perform tasks such as: add a new company, update an existing  or be removed from the database.
+Once granted login priviledges, the administrator can access the Admin Home Panel Page and choose from a dropdown to perform tasks such as: add a new company, update an existing  or removal from the database.
 
 <img src="readme/create.png">
 
-For safety purposes, on this page it will be displayed create a new user form and it will be displayed bellow.
+Only "create a new company" will be displayed as an option on this page to eliminate any mistakes in updating companies. 
 
 <img src="readme/AdminPage.png">
           
 
 ## About Page 
-The About Bunker Labs Marketplace, displayed as an icon, redirects the user to a new page that explains the purpose of this application, its intended users and outcome.
+The About Bunker Labs, displayed as an icon, redirects the user to a new page that explains the purpose of this application, its intended users and outcome.
 
-<img src= "readme/About.png">
+<img src= "readme/about.png">
 
 ## Challenges
-* Even thoght the team considered features for the application that will make the Marketplace better, we had to settle on delivering a product that serves the  needs of the stakeholder, due to time constraints.
-* Using Json Web Tokens for server authentification of admin login was a new concept we first tackled for this project and it was challenging at first. 
-* We wanted to ensure that the login and the stored personal information will be safe so we decided to used a SSL Certification. This process was a task that any of the team members have performed before,so it was time consuming.Some the steps involed are:
-  * The stakeholder purchased a domain so we can point it at the IP address hosted on Linode. 
-  * For the documentation of the process, in order to automatically enable HTTPS on the website, certbot was used.
+* We initially met with the product owner to discuss the layout, functionality, & MVP for the project. We 'whiteboarded' and created user stories to help facilitate the development process. We were able to create the MVP and add some additional functionality. The project had a deadline which made it difficult to add all of the future concepts that we laid out. 
+* Using Json Web Tokens for server authentification of admin login was a new concept we tackled for this project. It was challenging but was a learning experience for a valuable skill in authentication.
+* We wanted to ensure that stored personal information is safe We obtained a SSL Certification using Linode and CertBot. This process was a new task for all team members. 
+Some the steps involed are:
+  * The stakeholder purchasing a domain so we can point it at the IP address hosted on Linode. 
+  * For the documentation of the process, in order to automatically enable HTTPS on the website, CertBot was used.
   * Edit the root and SSH profiles to point the domain at the right IP address.
+  * Editing the index.js and removing some of the functionality like "ServiceWorker" to create a smooth user experience. 
 
 
 
 ## Phase Two
-Future iterations of this application will be able to have a user login page  Upon receiving login credentioals, the company owner can upload relevant information about their startup, edit their accounts as the business evolves and even delete it if they so desire.
-
+Future iterations of this application should include:
+  * A user login page 
+  * The company owner can upload or edit relevant information about their startup.
+  * Adding paypal links so the user can contribute to the success of the business.
+  * Allowing the user to upload videos remotely to display successful ventures. 
 
 
 

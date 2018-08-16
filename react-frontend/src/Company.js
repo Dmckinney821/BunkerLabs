@@ -1,7 +1,6 @@
 import React from 'react';
 import './Company.css';
 import { Timeline } from 'react-twitter-widgets';
-import YoutubeEmbedVideo from 'youtube-embed-video';
 import ReactPlayer from 'react-player';
 
 
@@ -30,10 +29,13 @@ import ReactPlayer from 'react-player';
     }
 
     function renderownerName(ownerName) {
+        console.log(ownerName);
         if (ownerName !== null && ownerName !== ''){
             return (
             <div>
+                <strong>
                 {ownerName}
+                </strong>
             </div>
             )
         } else {
@@ -60,26 +62,28 @@ import ReactPlayer from 'react-player';
         }
     }
 
-    function renderyoutubelink(youtubelink) {
-        if (youtubelink !== null && youtubelink !== ''){
+    function renderyoutubeLink(youtubeLink) {
+        console.log(youtubeLink);
+        if (youtubeLink !== null && youtubeLink !== ''){
             return (
-                <div className='youtube-embed'>
+                <div className="youtube-item" >
                     <ReactPlayer
-                    url='https://www.youtube.com/watch?v=Ez5-7yozuNg'
+                    url={youtubeLink}
                     width='100%'
-                    height='420px'
+                    // height='420px'
                     />
-
-                    {/* <YoutubeEmbedVideo 
-                    videoId='jgsPJVZY5pM'
-                    suggestions={false}
-                    height='350px'
-                    width='300px'
-                    /> */}
                     </div>
             )
         } else {
-            return null
+            return (
+                    <div className="youtube-item">
+                    <ReactPlayer
+                    url={'https://www.youtube.com/watch?v=QXZxsySko4U'}
+                    // width='100%'
+                    // height='420px'
+                    />
+                    </div>
+            )
         }
     }
     
@@ -101,14 +105,12 @@ import ReactPlayer from 'react-player';
         if (linkedin !== null && linkedin !== ''){
             return (
                 <div>
-                    <p> 
-                        <em>
                             <strong>
                                 Connect
                             </strong>
-                        </em> 
-                    </p>
+                    <div className="company-linkedIn">
                     {linkedin}
+                    </div>
                 </div>
             )
         } else {
@@ -120,7 +122,7 @@ import ReactPlayer from 'react-player';
         if (website !== null && website !== ''){
             return (
                 <div>
-                    {website}
+                    Website: {website}
                 </div>
             )
         } else {
@@ -161,7 +163,6 @@ import ReactPlayer from 'react-player';
     }
 
     function renderPhone (phone) {
-        console.log(phone);
         let part1 = ' (' + phone.slice(0,3) + ') ';
         let part2 = phone.slice(3,6) + '-';
         let part3 = phone.slice(6,10);
@@ -174,17 +175,23 @@ import ReactPlayer from 'react-player';
    
     const Company=({companyDetail})=>
             <div className="company-outercontainer">
-                <div className='please'>
-                <div className="div-Company"> {renderLogo(companyDetail.picture)}
-                <div className="company-name">{companyDetail.name}</div>
-                <div className='owenr-name'> {renderownerName(companyDetail.ownerName)}</div>
+                <div className='left-main-container'>
+                    <div className="company-logo-and-name">
+                        <div className="div-Company"> {renderLogo(companyDetail.picture)}
+                        <div className="company-name">{companyDetail.name}</div>
+                    </div>
+                </div>
                 <div className="company-box">           
                 <div className='summary-border'>
+                    <div className="main-summary-inner-container">
+                    <div className="company-summary"><strong>About us</strong></div>
                 <div className="company-summary">{companyDetail.summary}</div>
-                <div className="company-industry">{companyDetail.industry} industry</div>
-                <div className="company-stage">{companyDetail.stage} stage</div>
+                <div className="company-industry"> <strong>Industry: </strong>{companyDetail.industry}</div>
+                <div className="company-stage"><strong>Stage: </strong> {companyDetail.stage}</div>
                 {/* <p>Product and Services:{companyDetail.productAndServices}</p> */}
-                <div className="company-needs">Needs:
+                <div className="company-needs"><strong>
+                    Needs
+                    </strong> 
                 </div>
                 <ul>
                 <li>{companyDetail.need1}</li>
@@ -193,27 +200,31 @@ import ReactPlayer from 'react-player';
                 </ul>
                 {/* </p> */}
                 <div>
-                    <p> 
-                        <em>
                             <strong>
                                 Contact
                             </strong>
-                        </em> 
-                    </p>
-                <div className="company-website"><a href={`${companyDetail.website}`}> {renderwebsite(companyDetail.website)}</a></div>
+                <div className="company-website"><a href={`${companyDetail.website}`} target="_blank"> {renderwebsite(companyDetail.website)}</a></div>
                 <div className="company-email"><a href={`mailto:${companyDetail.email}`}>Email: {companyDetail.email}</a></div>
                 <div className="company-phone"><a href={`tel:{${companyDetail.phone}}`}>Phone: {renderPhone(companyDetail.phone)}</a></div>
-                <div className="company-linkedin"><a href={`${companyDetail.linkedIn}`}>{renderlinkedin(companyDetail.linkedIn)}</a></div>
-                </div>
+                <div className="company-linkedin"><a href={`${companyDetail.linkedIn}`} target="_blank">{renderlinkedin(companyDetail.linkedIn)}</a></div>
                 </div>
                 {/* Donate to this business - legal review/disclaimer needed? */}
                 <div className="company-paypal"> <a href={`${companyDetail.paypalLink}`}>{renderpaypallink(companyDetail.paypalLink)}</a></div>
                 </div>
+                    </div>
                 </div>
                 </div>
                 <div className='column-video'>
-                <div className="company-profile"> {renderprofile(companyDetail.profile)}</div>
-                <div className="company-youtube">{renderyoutubelink(companyDetail.youtubelink)}</div>
+                    <div className="profile-and-name-container">
+                    <div className="profile-and-name">
+                        <div className="company-profile"> {renderprofile(companyDetail.profile)}</div>
+                        <div className='owner-name'> {renderownerName(companyDetail.ownerName)}</div>
+                    </div>
+                    <div className="meet-the-owner">
+                    Meet the Owner
+                    </div>
+                    </div>
+                <div className="company-youtube">{renderyoutubeLink(companyDetail.youtubeLink)}</div>
                 </div>
                 <div className="twitter-biggersize">
                 
@@ -224,7 +235,7 @@ import ReactPlayer from 'react-player';
                     }}
                     options={{
                         username: 'TheBunkerLabs',
-                        height: '800',
+                        height: '790px',
                         
                         
                     }}
@@ -234,27 +245,6 @@ import ReactPlayer from 'react-player';
                 </div>
                 </div>
     
-    //currying  pattern-to customize and preset a component
-    
-    // const withRouter=(Component)=>(props)=>{
-    //     const id=props.match.params.id;
-    //     console.log(id);
-    //     const oneCompanyMatch= Component.find(company=>company._id===id);
-    //     return (
-
-    // // recomposed as it passes the props invisibly
-    // //as all the props from the parent to child will be passed no matter what
-    //          <Component {...props} companyDetail={oneCompanyMatch}/>
-    //     )
-
-    // }
-
-    // const resize=()=>{
-    //     if($(window).width()>480){
-    //         $("company-profile").insertAfter("company-renderLogo");
-    //     }
-
-    // }
     class API extends React.Component{
         constructor(props){
             super(props);
@@ -273,10 +263,11 @@ import ReactPlayer from 'react-player';
                     website:'',
                     email:'',
                     phone:'',
-                    youtubeLine:'',
+                    youtubeLink:'',
                     paypalLink:'',
                     profile: '',
-                    linkedIn: ''
+                    linkedIn: '',
+                    ownerName:''
                 }
             }
         }
@@ -302,10 +293,11 @@ import ReactPlayer from 'react-player';
                                 website: company.website,
                                 email: company.email,
                                 phone: company.phone,
-                                youtubeLine: company.youtubeLine,
+                                youtubeLink: company.youtubeLink,
                                 paypalLink: company.paypalLink,
                                 profile: company.profile,
-                                linkedIn: company.linkedIn
+                                linkedIn: company.linkedIn,
+                                ownerName: company.ownerName
                         }
                     })
                 });

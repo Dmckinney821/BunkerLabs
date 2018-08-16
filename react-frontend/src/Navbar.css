@@ -77,17 +77,23 @@ NavItem:hover {
     text-decoration-line: none;
 }
 
-.words-nav:visited {
+.individual-icon a:focus {
     color: white;
     text-decoration-color: inherit;
     text-decoration-line: none;
 }
 
-.words-nav:active {
+/* .words-nav:focus {
     color: white;
     text-decoration-color: inherit;
     text-decoration-line: none;
-}
+} */
+
+/* .words-nav:active {
+    color: white;
+    text-decoration-color: inherit;
+    text-decoration-line: none;
+} */
 
 .nav>li{
     text-align: left;
