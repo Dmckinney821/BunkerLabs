@@ -17,7 +17,7 @@ class adminLogin extends React.Component {
     componentDidMount() {
             //check local storage for token and if its there setState to token : token
             //if it doesnt exists or expired redirect to login
-            let serverRequest = 'http://localhost:4000/api/verifyToken';
+            let serverRequest = '/api/verifyToken';
             let localToken = JSON.parse(localStorage.getItem('token'))
 
             axios({
@@ -71,7 +71,7 @@ class adminLogin extends React.Component {
 
 handleLogin = () => {
     //DO POST REQUEST
-    var serverRequest = 'http://localhost:4000/api/admin';
+    var serverRequest = '/api/admin';
     var loginBody = {
         username: this.state.username,
         password: this.state.password 

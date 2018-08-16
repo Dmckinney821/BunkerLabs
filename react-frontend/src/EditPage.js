@@ -39,7 +39,7 @@ class EditPage extends React.Component {
 
     componentDidMount() {
 
-    let serverRequest = 'http://localhost:4000/api/verifyToken';
+    let serverRequest = '/api/verifyToken';
     let localToken = JSON.parse(localStorage.getItem('token'))
 
     axios({
@@ -57,7 +57,7 @@ class EditPage extends React.Component {
         })
     .catch(error => console.log(error));
 
-    fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
+    fetch(`/api/companies/${this.props.match.params.id}`)
     .then(res => res.json())
     .then(companyData => {
         this.setState({
@@ -306,7 +306,7 @@ class EditPage extends React.Component {
             'token': JSON.parse(localStorage.getItem('token'))
         };
 
-        axios.post(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`, companyObject, {headers})
+        axios.post(`/api/updatecompany/${this.props.match.params.id}`, companyObject, {headers})
             .then(res => {
                 return res.data._id
             })
@@ -318,7 +318,7 @@ class EditPage extends React.Component {
             fd.append('picture', this.state.logoBlob);
             axios({
                 method: 'post',
-                url: `http://localhost:4000/api/updatecompanypicture/${id}`,
+                url: `/api/updatecompanypicture/${id}`,
                 data: fd,
                 headers: {'Content-Type': 'multipart/form-data', ...headers }
                 })
@@ -334,7 +334,7 @@ class EditPage extends React.Component {
                 fd.append('picture', this.state.ownerBlob)
                 axios({
                         method: 'post',
-                        url: `http://localhost:4000/api/createownerphoto/${id}`,
+                        url: `/api/createownerphoto/${id}`,
                         data: fd,
                         headers: {
                             'Content-Type': 'multipart/form-data',
@@ -354,7 +354,7 @@ class EditPage extends React.Component {
         let headers = {
             'token': JSON.parse(localStorage.getItem('token'))
         };
-        return axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id, {headers})
+        return axios.post(`/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id, {headers})
         .then(res => {
             // console.log(res);
                 return res.data._id;
