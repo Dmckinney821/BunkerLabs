@@ -17,7 +17,7 @@ class adminLogin extends React.Component {
     componentDidMount() {
             //check local storage for token and if its there setState to token : token
             //if it doesnt exists or expired redirect to login
-            let serverRequest = '/api/verifyToken';
+            let serverRequest = 'http://localhost:4000/api/verifyToken';
             let localToken = JSON.parse(localStorage.getItem('token'))
 
             axios({
@@ -71,7 +71,7 @@ class adminLogin extends React.Component {
 
 handleLogin = () => {
     //DO POST REQUEST
-    var serverRequest = '/api/admin';
+    var serverRequest = 'http://localhost:4000/api/admin';
     var loginBody = {
         username: this.state.username,
         password: this.state.password 
@@ -157,23 +157,6 @@ render(){
                         </Modal.Footer>
                     </Modal>
                 </div>
-
-            {/* <div>username</div>
-                <input onChange={this.handleUsername}
-                type="text"
-                value={this.state.username}
-                />
-            
-                <div>password </div>
-                <input onChange={this.handlePassword}
-                type="text"
-                value={this.state.password}
-                />
-            
-                <br></br>
-            
-                <button onClick={this.handleLogin}>Login</button> */}
-
             </div>
         );
     };

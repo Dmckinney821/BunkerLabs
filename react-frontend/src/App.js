@@ -20,7 +20,6 @@ class App extends React.Component {
         <div className="main-app-container">
         <Route path='/' component={Homepage} exact={true}/>
         <Route path='/login' component={ adminLogin } exact={true}/>
-        <Route path='/admin/companies/:id/edit' component={ EditPage } exact={true}/>
         <Route path='/company/:id' component={Company} exact={true}/>
         <Route path='/about' component={AboutMarketplace} exact={true}/>
         <Route path='/admin' component={ adminPage } exact={true}/>

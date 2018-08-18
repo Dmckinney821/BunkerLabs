@@ -18,7 +18,7 @@ class Homepage extends React.Component{
     }
 
     componentDidMount(){
-        const url=`/api/companies/`;
+        const url = `http://localhost:4000/api/companies/`;
         let industries = ['Industry'];
         let stages = ['Stage'];
         fetch(url)

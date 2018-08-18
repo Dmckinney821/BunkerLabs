@@ -13,7 +13,7 @@ body {
   padding: 0;
   font-family: sans-serif;
   background-color: rgba(255, 255, 255, 0);
-  background-image: url('/images/default/backgroundcamo.jpg');
+  background-image: url('http://localhost:4000/images/default/backgroundcamo.jpg');
   background-position: center center;
   background-repeat: repeat;
   width: 100%;

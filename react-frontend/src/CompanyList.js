@@ -28,13 +28,13 @@ function renderLogo(picture) {
         if (picture) {
             return (
                 <div className="company-image-container">
-                    <img className="company-list-image" src={`/${picture}`} alt=""/>
+                    <img className="company-list-image" src={`http://localhost:4000/${picture}`} alt=""/>
                 </div>
             )
         } else {
             return (
                 <div className="company-image-container">
-                    <img className="company-list-image" src={`/images/default/noimageavailable.jpg`} alt=""/>
+                    <img className="company-list-image" src={`http://localhost:4000/images/default/noimageavailable.jpg`} alt=""/>
                 </div>
             )
         }

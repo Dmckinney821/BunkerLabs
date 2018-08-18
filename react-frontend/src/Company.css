@@ -180,7 +180,7 @@
 
 .owner-name {
     /* border: 3px solid orange; */
-    background-color: #333333;
+    background-color: black;
     color:white;
     /* margin-top: -35px; */
     text-shadow: -3.5px 0 black,
@@ -233,6 +233,7 @@
         /* justify-content: center; */
         height: 100%;
         width: 100%;
+        margin: 0px;
     }
 
     .left-main-container {

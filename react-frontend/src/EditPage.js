@@ -39,7 +39,7 @@ class EditPage extends React.Component {
 
     componentDidMount() {
 
-    let serverRequest = '/api/verifyToken';
+    let serverRequest = 'http://localhost:4000/api/verifyToken';
     let localToken = JSON.parse(localStorage.getItem('token'))
 
     axios({
@@ -57,7 +57,7 @@ class EditPage extends React.Component {
         })
     .catch(error => console.log(error));
 
-    fetch(`/api/companies/${this.props.match.params.id}`)
+    fetch(`http://localhost:4000/api/companies/${this.props.match.params.id}`)
     .then(res => res.json())
     .then(companyData => {
         this.setState({
@@ -283,7 +283,7 @@ class EditPage extends React.Component {
     updateCompany = (event) => {
         event.preventDefault()
         
-        let needs =[this.state.form.need1, this.state.form.need2, this.state.form.need2];
+        let needs =[this.state.form.need1, this.state.form.need2, this.state.form.need3];
         
         let companyObject = {
             name: this.state.form.name,
@@ -306,7 +306,9 @@ class EditPage extends React.Component {
             'token': JSON.parse(localStorage.getItem('token'))
         };
 
-        axios.post(`/api/updatecompany/${this.props.match.params.id}`, companyObject, {headers})
+        axios.post(`http://localhost:4000/api/updatecompany/${this.props.match.params.id}`, companyObject, {
+            headers
+        })
             .then(res => {
                 return res.data._id
             })
@@ -318,7 +320,7 @@ class EditPage extends React.Component {
             fd.append('picture', this.state.logoBlob);
             axios({
                 method: 'post',
-                url: `/api/updatecompanypicture/${id}`,
+                url: `http://localhost:4000/api/updatecompanypicture/${id}`,
                 data: fd,
                 headers: {'Content-Type': 'multipart/form-data', ...headers }
                 })
@@ -334,7 +336,7 @@ class EditPage extends React.Component {
                 fd.append('picture', this.state.ownerBlob)
                 axios({
                         method: 'post',
-                        url: `/api/createownerphoto/${id}`,
+                        url: `http://localhost:4000/api/createownerphoto/${id}`,
                         data: fd,
                         headers: {
                             'Content-Type': 'multipart/form-data',
@@ -354,7 +356,9 @@ class EditPage extends React.Component {
         let headers = {
             'token': JSON.parse(localStorage.getItem('token'))
         };
-        return axios.post(`/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id, {headers})
+        return axios.post(`http://localhost:4000/api/deletecompany/${this.props.match.params.id}`, this.props.match.params.id, {
+            headers
+        })
         .then(res => {
             // console.log(res);
                 return res.data._id;
@@ -716,22 +720,6 @@ class EditPage extends React.Component {
                     </div>     
                 </Form>
     </div>
-            {/* {!this.state.cropperIsHidden && 
-            <Cropper
-                ref='cropper'
-                src={this.state.imagePreview}
-                style={{height: 400, width: '100%'}}
-                // Cropper.js options
-                aspectRatio={8/6}
-                guides={false}
-                autoCropArea={0}
-                strict={false}
-                highlight={false}
-                dragCrop={true}
-                cropBoxMovable={true}
-                cropBoxResizable={false}
-                crop={this._crop.bind(this)} />
-            } */}
 
             <div className="modal-cropper-logo">
                     <Modal show={this.state.showModalCropper} onHide={this.handleCloseModalCropper}>
@@ -819,7 +807,6 @@ class EditPage extends React.Component {
                         </Modal.Footer>
                     </Modal>
                 </div>
-            
             </div>
         )
     }

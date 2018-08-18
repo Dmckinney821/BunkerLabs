@@ -41,7 +41,7 @@ class NewForm extends React.Component {
     componentDidMount() {
         //check local storage for token and if its there setState to token : token
         //if it doesnt exists or expired redirect to login
-        let serverRequest = '/api/verifyToken';
+        let serverRequest = 'http://localhost:4000/api/verifyToken';
         let localToken = JSON.parse(localStorage.getItem('token'))
         
 
@@ -287,7 +287,7 @@ class NewForm extends React.Component {
     handleEntry(event){
         event.preventDefault();
         
-        let needs = [this.state.form.need1, this.state.form.need2, this.state.form.need2];
+        let needs = [this.state.form.need1, this.state.form.need2, this.state.form.need3];
         
         let companyObject = {
             name: this.state.form.name,
@@ -309,7 +309,9 @@ class NewForm extends React.Component {
             'token': JSON.parse(localStorage.getItem('token'))
         };
         
-        axios.post('/api/createcompany', companyObject, {headers})
+        axios.post('http://localhost:4000/api/createcompany', companyObject, {
+            headers
+        })
         .then(res => {
             return res.data._id;
         })
@@ -321,7 +323,7 @@ class NewForm extends React.Component {
                     fd.append('picture', this.state.logoBlob);
                     axios({
                         method: 'post',
-                        url: `/api/createcompanypicture/${id}`,
+                        url: `http://localhost:4000/api/createcompanypicture/${id}`,
                         data: fd,
                         headers: {'Content-Type': 'multipart/form-data', ...headers }
                     })
@@ -337,7 +339,7 @@ class NewForm extends React.Component {
                 fd.append('picture', this.state.ownerBlob)
                 axios({
                     method: 'post',
-                    url: `/api/createownerphoto/${id}`,
+                    url: `http://localhost:4000/api/createownerphoto/${id}`,
                     data: fd,
                     headers: {
                         'Content-Type': 'multipart/form-data',
@@ -682,22 +684,6 @@ class NewForm extends React.Component {
                     
                 </Form>
     </div>
-            {/* {!this.state.cropperIsHidden &&
-            <Cropper
-                ref='cropper'
-                src={this.state.imagePreview}
-                style={{height: 400, width: '100%'}}
-                // Cropper.js options
-                aspectRatio={8/6}
-                guides={false}
-                autoCropArea={0}
-                strict={false}
-                highlight={false}
-                dragCrop={true}
-                cropBoxMovable={true}
-                cropBoxResizable={false}
-                crop={this._crop.bind(this)} />} */}
-
                 <div className="modal-cropper-logo">
                     <Modal show={this.state.showModalCropper} onHide={this.handleCloseModalCropper}>
                         <Modal.Header closeButton>

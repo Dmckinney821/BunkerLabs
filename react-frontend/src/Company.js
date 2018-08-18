@@ -29,7 +29,6 @@ import ReactPlayer from 'react-player';
     }
 
     function renderownerName(ownerName) {
-        console.log(ownerName);
         if (ownerName !== null && ownerName !== ''){
             return (
             <div>
@@ -63,7 +62,6 @@ import ReactPlayer from 'react-player';
     }
 
     function renderyoutubeLink(youtubeLink) {
-        console.log(youtubeLink);
         if (youtubeLink !== null && youtubeLink !== ''){
             return (
                 <div className="youtube-item" >
@@ -134,13 +132,13 @@ import ReactPlayer from 'react-player';
         if (picture) {
             return (
                 <div className="container-image">
-                    <img className="company-picture" src={`/${picture}`} alt=""/>
+                    <img className="company-picture" src={`http://localhost:4000/${picture}`} alt=""/>
                 </div>
             )
         } else {
             return (
                 <div className="container-image">
-                    <img className="company-picture" src={`/images/default/noprofileimage2.png`} alt=""/>
+                    <img className="company-picture" src={`http://localhost:4000/images/default/noprofileimage2.png`} alt=""/>
                 </div>
             )
         }
@@ -150,13 +148,13 @@ import ReactPlayer from 'react-player';
         if (logo) {
             return (
                 <div >
-                <img className="company-renderLogo" src={`/${logo}`} alt=""/>
+                <img className="company-renderLogo" src={`http://localhost:4000/${logo}`} alt=""/>
                 </div>
             )
         } else {
             return (
                 <div>
-                    <img className="company-renderLogo" src={`/images/default/noimageavailable.jpg`} alt=""/>
+                    <img className="company-renderLogo" src={`http://localhost:4000/images/default/noimageavailable.jpg`} alt=""/>
                 </div>
             )
         }
@@ -172,7 +170,7 @@ import ReactPlayer from 'react-player';
         );
     };
 
-   
+
     const Company=({companyDetail})=>
             <div className="company-outercontainer">
                 <div className='left-main-container'>
@@ -273,7 +271,7 @@ import ReactPlayer from 'react-player';
         }
 
         componentDidMount(){
-            const url=`/api/companies/${this.props.match.params.id}`;
+            const url = `http://localhost:4000/api/companies/${this.props.match.params.id}`;
             // console.log(url);
             fetch(url)
                 .then(company=>company.json())
