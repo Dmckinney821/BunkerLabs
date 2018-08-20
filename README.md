@@ -1,6 +1,6 @@
 ## BunkerLabs Atlanta
 
-## <a href="https://www.youtube.com/edit?o=U&video_id=kY8BfH-U4eU"> BunkerLabs Atlanta Demo</a>
+## <a href="https://youtu.be/kY8BfH-U4eU"> BunkerLabs Atlanta Demo</a>
 
 BunkerLabs Atlanta Marketplace represents the Capstone project for the DigitalCrafts team members. The members listed below used all of the skills and languages learned over the 16 week bootcamp to build an application for a business located in the Atlanta Tech Village. The platform allows veterans to illustrate their entrepreneurial endeavors and showcase what needs they may have in bringing their ideas into fruition.
 
