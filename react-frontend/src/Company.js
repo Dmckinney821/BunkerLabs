@@ -42,25 +42,6 @@ import ReactPlayer from 'react-player';
         }
     }
 
-    function renderwebsite(website) {
-        if (website !== null && website !== ''){
-            return (
-                <div>
-                    {website}
-                </div>
-            )
-        } else {
-            return null
-        }
-    }
-    const opts ={
-        height: '390',
-        width: '640',
-        playerVars: {
-            autoplay: 1
-        }
-    }
-
     function renderyoutubeLink(youtubeLink) {
         if (youtubeLink !== null && youtubeLink !== ''){
             return (
@@ -186,7 +167,6 @@ import ReactPlayer from 'react-player';
                 <div className="company-summary">{companyDetail.summary}</div>
                 <div className="company-industry"> <strong>Industry: </strong>{companyDetail.industry}</div>
                 <div className="company-stage"><strong>Stage: </strong> {companyDetail.stage}</div>
-                {/* <p>Product and Services:{companyDetail.productAndServices}</p> */}
                 <div className="company-needs"><strong>
                     Needs
                     </strong> 
@@ -196,7 +176,6 @@ import ReactPlayer from 'react-player';
                 {renderneed2(companyDetail.need2)}
                 {renderneed3(companyDetail.need3)}
                 </ul>
-                {/* </p> */}
                 <div>
                             <strong>
                                 Contact
@@ -234,6 +213,7 @@ import ReactPlayer from 'react-player';
                     options={{
                         username: 'TheBunkerLabs',
                         height: '790px',
+                        width: '100%'
                         
                         
                     }}
